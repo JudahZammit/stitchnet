@@ -5,8 +5,8 @@ cleaned\_cropped\_full\_ct
  |\_ 
 
 # Dependencies
-tensorflow 2.x
-albumentations
-segmentation-models
-tensorflow-probability
-focal-loss
+- tensorflow 2.7.0
+- albumentations 1.1.0
+- segmentation-models 1.0.1
+- tensorflow-probability 0.15.0
+- focal-loss 0.0.7
