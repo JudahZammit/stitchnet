@@ -3,10 +3,7 @@
 
 from importlib import import_module
 
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
 from shared_files.data_generators import *
-from tabulate import tabulate
 from shared_files.param import *
 
 import gc
@@ -14,12 +11,9 @@ import glob
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.callbacks import ModelCheckpoint
-from matplotlib import pyplot as plt
 import math
-import pandas as pd
 from PIL import Image
 import numpy as np
-import scipy.stats
 import os
 import random
 from tensorflow.keras.losses import MAE as mae
@@ -27,16 +21,14 @@ from tensorflow.keras.losses import binary_crossentropy as bce
 from tensorflow.keras.backend import flatten 
 import sys
 
-modelName = sys.argv[1]
-
-mod = import_module('{}.layers.filler'.format(modelName),)
+mod = import_module('stitchnet_layers.filler')
 myModel = mod.myModel
 
-mod = import_module('{}.layers.state'.format(modelName))
+mod = import_module('stitchnet_layers.state')
 State = mod.State
 l = State.layers
 
-MODEL_PATH = './{}/'.format(modelName)
+MODEL_PATH = './stitchnet/'
 WEIGHT_PATH = MODEL_PATH + 'weights.tf'
 
 gen = tr_gen(batch_size = BS,crop = True,flip = True)
@@ -46,18 +38,18 @@ model_opt = tf.keras.optimizers.Adam(lr=.0003,clipnorm = 1.,clipvalue = 0.5)
 model.compile(model_opt)
 
 
-path = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/unlabelled'
+path = './cleaned_cropped_full_ct/unlabelled'
 image_path_list = list(glob.iglob(path+'/**/*.jpg',recursive = True))
 num_ims = len(image_path_list)
 
 
 # Reads in all the labelled images, uses stitchnet to predict their segmentations and writes the predictions to disk
 def pred():
-        path = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/train'
+        path = './cleaned_cropped_full_ct/train'
         train_path_list = list(glob.iglob(path+'/**/*.jpg',recursive = True))
-        path = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/val'
+        path = './cleaned_cropped_full_ct/val'
         val_path_list = list(glob.iglob(path+'/**/*.jpg',recursive = True))
-        path = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/test'
+        path = './cleaned_cropped_full_ct/test'
         test_path_list = list(glob.iglob(path+'/**/*.jpg',recursive = True))
         img_path_list = np.array(train_path_list + val_path_list + test_path_list)
 #
@@ -112,7 +104,7 @@ def train():
                   verbose = 1)
         model.save_weights(MODEL_PATH+'weights.tf')
 
-#train()
-#pred()
+train()
+pred()
 model.load_weights('./weight/stitchnet/stitchnet_weights.tf')
 fig_pred()

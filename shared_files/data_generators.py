@@ -115,13 +115,13 @@ def img_gen(batch_size,path,shape = (SHAPE,SHAPE),crop = False,flip = False,ligh
 def tr_gen(batch_size,shape = (SHAPE,SHAPE),
         crop = False,flip = False,light = False):
     
-    base_hel = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/unlabelled/healthy'
+    base_hel = './cleaned_cropped_full_ct/unlabelled/healthy'
     hel_gen = img_gen(batch_size//3,base_hel,shape,crop,flip,light)
     
-    base_ncp = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/unlabelled/ncp'
+    base_ncp = './cleaned_cropped_full_ct/unlabelled/ncp'
     ncp_gen = img_gen(batch_size//3,base_ncp,shape,crop,flip,light)
     
-    base_lab = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/train'
+    base_lab = './cleaned_cropped_full_ct/train'
     lab_gen = lab_img_gen(batch_size//3,base_lab,shape,crop,flip,light)
  
     T_hel = np.zeros((batch_size//3, shape[1], shape[0],RGB), dtype='float32') 
@@ -151,13 +151,13 @@ def tr_gen(batch_size,shape = (SHAPE,SHAPE),
 def val_gen(batch_size,shape = (SHAPE,SHAPE),
         crop = False,flip = False,light = False):
     
-    base_hel = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/unlabelled/healthy'
+    base_hel = './cleaned_cropped_full_ct/unlabelled/healthy'
     hel_gen = img_gen(batch_size//3,base_hel,shape,crop,flip,light)
     
-    base_ncp = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/unlabelled/ncp'
+    base_ncp = './cleaned_cropped_full_ct/unlabelled/ncp'
     ncp_gen = img_gen(batch_size//3,base_ncp,shape,crop,flip,light)
     
-    base_lab = '/home/judah/Desktop/research/stichnet/cleaned_cropped_full_ct/val'
+    base_lab = './cleaned_cropped_full_ct/val'
     lab_gen = lab_img_gen(batch_size//3,base_lab,shape,crop,flip,light)
  
     T_hel = np.zeros((batch_size//3, shape[1], shape[0],RGB), dtype='float32') 
