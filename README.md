@@ -1,8 +1,8 @@
 # stitchnet
-Weights for Unet and StitchNet can be found at [here](https://drive.protonmail.com/urls/MNZG7WEWFW#goXbo4jJFoXh)
-The dataset is expected to be as follows:
-cleaned\_cropped\_full\_ct
- |\_ 
+Weights for Unet and StitchNet can be found at [here](https://drive.protonmail.com/urls/MNZG7WEWFW#goXbo4jJFoXh).
+The data folder, cleaned_cropped_full_ct, does not contain any actual data.
+The data must be downloaded from [here](ncov-ai.big.ac.cn/download?lang=en).
+Once downloaded, you can follow the pre-proccessing procedure outlined in "Semi-Supervised COVID-19 CT Image Segmentation Using Deep Generative Models".
 
 # Dependencies
 - tensorflow 2.7.0
